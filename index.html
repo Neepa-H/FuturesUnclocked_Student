@@ -229,32 +229,89 @@
 
         /* Print-specific adjustments to ensure optimal layout on A4 */
         @media print {
-            body {
-                padding: 0;
-                margin: 0;
-                min-height: auto;
-                justify-content: flex-start;
-            }
-            .infographic-side {
-                margin-bottom: 0; /* No margin between pages when printed */
-                box-shadow: none; /* No shadow for print */
-                border-radius: 0; /* No rounded corners for print edges */
-                padding: 1.2rem; /* Slightly reduced padding for print */
-            }
-            h1 { font-size: 2.5rem !important; margin-bottom: 1rem !important; }
-            h2 { font-size: 1.4rem !important; margin-bottom: 0.4rem !important; }
-            h3 { font-size: 1.8rem !important; margin-bottom: 0.75rem !important; }
-            h4 { font-size: 1.1rem !important; margin-bottom: 0.3rem !important; }
-            p { font-size: 0.85rem !important; }
-            .text-6xl { font-size: 3.5rem !important; } /* Adjust icon size for print */
-            .option-card { padding: 0.5rem !important; }
-            .card-details { font-size: 0.75rem !important; margin-top: 0.5rem !important; padding: 0.5rem !important; }
-            .card-details ul { padding-left: 0; margin-top: 0.25rem; }
-            .card-details li {
-                margin-bottom: 0.25rem !important;
-                padding: 0.4rem !important;
-                gap: 0.5rem !important;
-                border-bottom: 1px solid #e2e8f0; /* Solid border for print */
+  body {
+    padding: 0;
+    margin: 0;
+    min-height: auto;
+    justify-content: flex-start;
+  }
+
+  .infographic-side {
+    width: 100%;
+    height: 210mm;         /* Exact A4 landscape height */
+    max-height: 210mm;     /* Prevent overflow */
+    max-width: 297mm;      /* Exact A4 landscape width */
+    overflow: hidden;      /* Prevent spillover */
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 1rem;         /* Tighter padding for print */
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .infographic-side:last-child {
+    page-break-after: auto;  /* Don’t force break after last */
+  }
+
+  h1 { font-size: 2.2rem !important; margin-bottom: 0.8rem !important; }
+  h2 { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
+  h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
+  h4 { font-size: 1rem !important; margin-bottom: 0.3rem !important; }
+  p { font-size: 0.85rem !important; }
+  .text-6xl { font-size: 3rem !important; }
+
+  .option-card { padding: 0.5rem !important; }
+  .card-details {
+    font-size: 0.75rem !important;
+    margin-top: 0.4rem !important;
+    padding: 0.5rem !important;
+  }
+
+  .checkbox-container label {
+    font-size: 0.8rem;
+  }
+  .checkbox-container input[type="checkbox"] {
+    width: 0.8rem; height: 0.8rem;
+  }
+  .checkbox-container input[type="checkbox"]:checked::after {
+    font-size: 0.6rem;
+  }
+
+  .reflection-section {
+    padding: 1.2rem;
+  }
+  .reflection-question h3 {
+    font-size: 1.4rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .reflection-option label {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .fillable-line {
+    height: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .qr-section {
+    flex-direction: row !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+  }
+  .qr-block {
+    max-width: 45% !important;
+    padding: 0.8rem !important;
+    gap: 0.5rem !important;
+  }
+  .qr-block img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .qr-block h4 { font-size: 1rem !important; }
+  .qr-block p { font-size: 0.75rem !important; }
+}
+
             }
             .card-details li:last-child {
                 border-bottom: none !important;
