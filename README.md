@@ -15,6 +15,6 @@
 - Use the reflection questions at the end to plan your next steps.
 
 💬 **Who Made This?**
-This guide was created as part of an End Point Assessment project by Neepa Hekim (Syeda). It’s designed to make your choices clear and simple, no matter where you’re starting from.
+This guide was created as part of an End Point Assessment project by Syeda Hekim (Neepa). It’s designed to make your choices clear and simple, no matter where you’re starting from.
 
 ---
