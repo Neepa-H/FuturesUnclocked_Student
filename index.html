@@ -24,28 +24,32 @@
         }
 
         /* Styling for each A4 landscape 'side' - simulating a two-sided print */
-        .infographic-side {
-            width: 100%; /* Make it fluid up to a max-width */
-            max-width: 297mm; /* Approximate A4 Landscape width for large screens */
-            min-height: 210mm; /* Use min-height instead of fixed height to allow content to push it */
-            padding: 1.5rem;
-            box-sizing: border-box;
-            background-color: #fff;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem; /* Space between 'sides' for screen view */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* IMPORTANT: Align content to the top within each side */
-            page-break-after: always; /* Force a page break after each side when printing */
-        }
+        ./* Styling for each A4 landscape 'side' - simulating a two-sided print */
+.infographic-side {
+  width: 100%; /* Make it fluid up to a max-width */
+  max-width: 297mm; /* Approximate A4 Landscape width for large screens */
+  min-height: 210mm; /* Use min-height instead of fixed height to allow content to push it */
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem; /* Space between 'sides' for screen view */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top within each side */
 
-        /* Adjustments for the last side to prevent an extra blank page break */
-        .infographic-side:last-child {
-            page-break-after: avoid;
-            margin-bottom: 0;
-        }
+  page-break-after: always; /* Force a page break after each side when printing */
+  page-break-inside: avoid;  /* ✅ Prevent splitting a side mid-page */
+}
+
+/* Adjustments for the last side to prevent an extra blank page break */
+.infographic-side:last-child {
+  page-break-after: auto; /* ✅ Better than 'avoid', ensures no empty page at end */
+}
+
+        
 
         /* General styles for option cards */
         .option-card {
