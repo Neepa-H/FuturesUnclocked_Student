@@ -1,19 +1,20 @@
-# FuturesUnlocked Student Guide
+# Futures Unlocked: Student Guide
 
-This is a simple interactive HTML handout designed to help students in Year 11 explore their Post-16 pathways.
+**Your Future Unlocked** is a simple, interactive online guide to help you explore your Post-16 options after Year 11.
 
-## 📄 Contents
+🗂️ **What's Inside**
+- `index.html` — The main student guide with pathway cards, myth-busting facts, and reflection questions.
+- `qr_careerpilot.png` — QR code for the **Careerpilot Careers Quiz**.
+- `qr_ncs.png` — QR code for the **National Careers Service Skills Assessment**.
 
-- `index.html` – The student guide with pathway cards, reflection questions and interactive checkboxes.
-- `qr_careerpilot.png` – QR code linking to the Careerpilot careers quiz.
-- `qr_ncs.png` – QR code linking to the National Careers Service Skills Assessment.
+🚀 **How to Use It**
+- Open the guide in your browser: ****
+- Read about each option: A-levels, BTECs, T-Levels, IB, Apprenticeships and more.
+- Click or tick what feels right for you — highlight your pathway!
+- Scan a QR code to take a quick quiz and get personalised ideas.
+- Use the reflection questions at the end to plan your next steps.
 
-## 🚀 How to Use
+💬 **Who Made This?**
+This guide was created as part of an End Point Assessment project by Neepa Hekim(Syeda). It’s designed to make your choices clear and simple, no matter where you’re starting from.
 
-- Open the site via GitHub Pages: [YOUR_GITHUB_PAGES_LINK_HERE]
-- Students can read about each pathway, tick what feels right, and scan QR codes to try quizzes.
-
-## ✨ Credits
-
-Created as part of my End Point Assessment project to support inclusive CEIAG.
-
+---
