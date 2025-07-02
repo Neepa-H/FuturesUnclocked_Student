@@ -23,32 +23,28 @@
         }
 
         /* Styling for each A4 landscape 'side' - simulating a two-sided print */
-        ./* Styling for each A4 landscape 'side' - simulating a two-sided print */
-.infographic-side {
-  width: 100%; /* Make it fluid up to a max-width */
-  max-width: 297mm; /* Approximate A4 Landscape width for large screens */
-  min-height: 210mm; /* Use min-height instead of fixed height to allow content to push it */
-  padding: 1.5rem;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem; /* Space between 'sides' for screen view */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Align content to the top within each side */
+        .infographic-side {
+            width: 100%; /* Make it fluid up to a max-width */
+            max-width: 297mm; /* Approximate A4 Landscape width for large screens */
+            min-height: 210mm; /* Use min-height instead of fixed height to allow content to push it */
+            padding: 1.5rem;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem; /* Space between 'sides' for screen view */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top within each side */
+            page-break-after: always; /* Force a page break after each side when printing */
+            page-break-inside: avoid;  /* Prevent splitting a side mid-page */
+        }
 
-  page-break-after: always; /* Force a page break after each side when printing */
-  page-break-inside: avoid;  /* ✅ Prevent splitting a side mid-page */
-}
-
-/* Adjustments for the last side to prevent an extra blank page break */
-.infographic-side:last-child {
-  page-break-after: auto; /* ✅ Better than 'avoid', ensures no empty page at end */
-}
-
-        
+        /* Adjustments for the last side to prevent an extra blank page break */
+        .infographic-side:last-child {
+            page-break-after: auto; /* Better than 'avoid', ensures no empty page at end */
+        }
 
         /* General styles for option cards */
         .option-card {
@@ -229,117 +225,87 @@
 
         /* Print-specific adjustments to ensure optimal layout on A4 */
         @media print {
-  body {
-    padding: 0;
-    margin: 0;
-    min-height: auto;
-    justify-content: flex-start;
-  }
-
-  .infographic-side {
-    width: 100%;
-    height: 210mm;         /* Exact A4 landscape height */
-    max-height: 210mm;     /* Prevent overflow */
-    max-width: 297mm;      /* Exact A4 landscape width */
-    overflow: hidden;      /* Prevent spillover */
-    box-shadow: none;
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 1rem;         /* Tighter padding for print */
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-
-  .infographic-side:last-child {
-    page-break-after: auto;  /* Don’t force break after last */
-  }
-
-  h1 { font-size: 2.2rem !important; margin-bottom: 0.8rem !important; }
-  h2 { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
-  h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
-  h4 { font-size: 1rem !important; margin-bottom: 0.3rem !important; }
-  p { font-size: 0.85rem !important; }
-  .text-6xl { font-size: 3rem !important; }
-
-  .option-card { padding: 0.5rem !important; }
-  .card-details {
-    font-size: 0.75rem !important;
-    margin-top: 0.4rem !important;
-    padding: 0.5rem !important;
-  }
-
-  .checkbox-container label {
-    font-size: 0.8rem;
-  }
-  .checkbox-container input[type="checkbox"] {
-    width: 0.8rem; height: 0.8rem;
-  }
-  .checkbox-container input[type="checkbox"]:checked::after {
-    font-size: 0.6rem;
-  }
-
-  .reflection-section {
-    padding: 1.2rem;
-  }
-  .reflection-question h3 {
-    font-size: 1.4rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-  .reflection-option label {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-  .fillable-line {
-    height: 1rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .qr-section {
-    flex-direction: row !important;
-    gap: 1rem !important;
-    padding: 1rem !important;
-  }
-  .qr-block {
-    max-width: 45% !important;
-    padding: 0.8rem !important;
-    gap: 0.5rem !important;
-  }
-  .qr-block img {
-    width: 80px !important;
-    height: 80px !important;
-  }
-  .qr-block h4 { font-size: 1rem !important; }
-  .qr-block p { font-size: 0.75rem !important; }
-}
-
+            body {
+                padding: 0;
+                margin: 0;
+                min-height: auto;
+                justify-content: flex-start;
             }
-            .card-details li:last-child {
-                border-bottom: none !important;
-            }
-            .card-details li .icon { font-size: 1.2em !important; }
-            .checkbox-container label { font-size: 0.8rem; }
-            .checkbox-container input[type="checkbox"] { width: 0.8rem; height: 0.8rem; }
-            .checkbox-container input[type="checkbox"]:checked::after { font-size: 0.6rem; }
-            .reflection-section { padding: 1.5rem; }
-            .reflection-question h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
-            .reflection-option label { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
-            .fillable-line { height: 1.2rem; margin-bottom: 0.5rem; }
 
-            /* Print adjustments for QR section */
+            .infographic-side {
+                width: 100%;
+                height: 210mm;         /* Exact A4 landscape height */
+                max-height: 210mm;     /* Prevent overflow */
+                max-width: 297mm;      /* Exact A4 landscape width */
+                overflow: hidden;      /* Prevent spillover */
+                box-shadow: none;
+                border-radius: 0;
+                margin-bottom: 0;
+                padding: 1rem;         /* Tighter padding for print */
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .infographic-side:last-child {
+                page-break-after: auto;  /* Don’t force break after last */
+            }
+
+            h1 { font-size: 2.2rem !important; margin-bottom: 0.8rem !important; }
+            h2 { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
+            h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
+            h4 { font-size: 1rem !important; margin-bottom: 0.3rem !important; }
+            p { font-size: 0.85rem !important; }
+            .text-6xl { font-size: 3rem !important; }
+
+            .option-card { padding: 0.5rem !important; }
+            .card-details {
+                font-size: 0.75rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.5rem !important;
+            }
+
+            .checkbox-container label {
+                font-size: 0.8rem;
+            }
+            .checkbox-container input[type="checkbox"] {
+                width: 0.8rem; height: 0.8rem;
+            }
+            .checkbox-container input[type="checkbox"]:checked::after {
+                font-size: 0.6rem;
+            }
+
+            .reflection-section {
+                padding: 1.2rem;
+            }
+            .reflection-question h3 {
+                font-size: 1.4rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            .reflection-option label {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .fillable-line {
+                height: 1rem;
+                margin-bottom: 0.4rem;
+            }
+
             .qr-section {
-                padding: 1.5rem !important;
+                flex-direction: row !important;
                 gap: 1rem !important;
-                flex-direction: column !important; /* Stack vertically for print */
-                align-items: center !important;
+                padding: 1rem !important;
             }
             .qr-block {
-                max-width: 100% !important; /* Allow full width for print */
-                padding: 1rem !important;
+                max-width: 45% !important;
+                padding: 0.8rem !important;
                 gap: 0.5rem !important;
             }
+            .qr-block img {
+                width: 80px !important;
+                height: 80px !important;
+            }
             .qr-block h4 { font-size: 1rem !important; }
-            .qr-block p { font-size: 0.8rem !important; }
-            .qr-block img { width: 100px !important; height: 100px !important; }
+            .qr-block p { font-size: 0.75rem !important; }
         }
         /* Styling for the new QR code section */
         .qr-section {
@@ -420,7 +386,7 @@
                 <h2 class="text-2xl font-bold text-sky-800 mb-2">A-levels</h2>
                 <p class="text-gray-700 text-lg">Academic subjects, ideal for university routes.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -437,13 +403,13 @@
                         <li>
                             <span class="icon">✍️</span>
                             <div class="text-content">
-                                <strong>Assessment:</strong> Mostly **final exams** at the end of the two years, with some coursework in certain subjects.
+                                <strong>Assessment:</strong> Mostly <strong>final exams</strong> at the end of the two years, with some coursework in certain subjects.
                             </div>
                         </li>
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> The main route to **university** (<span class="font-normal italic text-gray-600">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
+                                <strong>Progression:</strong> The main route to <strong>university</strong> (<span class="font-normal italic text-gray-600">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
                             </div>
                         </li>
                         <li class="perception">
@@ -473,7 +439,7 @@
                 <h2 class="text-2xl font-bold text-emerald-800 mb-2">BTECs</h2>
                 <p class="text-gray-700 text-lg">Practical and coursework-based, focusing on vocational skills.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -492,13 +458,13 @@
                         <li>
                             <span class="icon">📋</span>
                             <div class="text-content">
-                                <strong>Assessment:</strong> Mainly **coursework and projects**, with some exams or practical assessments. It’s more continuous assessment.
+                                <strong>Assessment:</strong> Mainly <strong>coursework and projects</strong>, with some exams or practical assessments. It’s more continuous assessment.
                             </div>
                         </li>
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> Accepted by many **universities** (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and is now studying Nursing at university.
+                                <strong>Progression:</strong> Accepted by many <strong>universities</strong> (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and is now studying Nursing at university.
                             </div>
                         </li>
                         <li class="perception">
@@ -528,7 +494,7 @@
                 <h2 class="text-2xl font-bold text-purple-800 mb-2">T-Levels</h2>
                 <p class="text-gray-700 text-lg">A mix of classroom learning and significant real work experience.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -545,13 +511,13 @@
                         <li>
                             <span class="icon">📋</span>
                             <div class="text-content">
-                                <strong>Assessment:</strong> A mix of exams, practical assessments, and a big **employer-set project** based on real-world scenarios.
+                                <strong>Assessment:</strong> A mix of exams, practical assessments, and a big <strong>employer-set project</strong> based on real-world scenarios.
                             </div>
                         </li>
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> They're equivalent to **3 A-levels** and are accepted by many universities for relevant degrees, or you can go straight into skilled employment or higher apprenticeships.
+                                <strong>Progression:</strong> They're equivalent to <strong>3 A-levels</strong> and are accepted by many universities for relevant degrees, or you can go straight into skilled employment or higher apprenticeships.
                             </div>
                         </li>
                         <li class="perception">
@@ -581,7 +547,7 @@
                 <h2 class="text-2xl font-bold text-indigo-800 mb-2">IB (International Baccalaureate) Diploma</h2>
                 <p class="text-gray-700 text-lg">Broad academic study with a global focus, often leading to university.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -598,13 +564,13 @@
                         <li>
                             <span class="icon">✍️</span>
                             <div class="text-content">
-                                <strong>Assessment:</strong> A good mix of **final exams and internal assessments** throughout the course (e.g., essays, presentations, practicals).
+                                <strong>Assessment:</strong> A good mix of <strong>final exams and internal assessments</strong> throughout the course (e.g., essays, presentations, practicals).
                             </div>
                         </li>
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> Highly valued for **university** entry worldwide (including top UK universities) because it shows a broad education and strong critical thinking skills.
+                                <strong>Progression:</strong> Highly valued for <strong>university</strong> entry worldwide (including top UK universities) because it shows a broad education and strong critical thinking skills.
                             </div>
                         </li>
                         <li class="perception">
@@ -634,7 +600,7 @@
                 <h2 class="text-2xl font-bold text-amber-800 mb-2">Apprenticeships</h2>
                 <p class="text-gray-700 text-lg">Get paid to learn a job, gaining qualifications along the way.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -651,13 +617,13 @@
                         <li>
                             <span class="icon">📋</span>
                             <div class="text-content">
-                                <strong>Assessment:</strong> Continuous assessment in the workplace, building a portfolio of your skills, and a final **end-point assessment** once you've completed your training.
+                                <strong>Assessment:</strong> Continuous assessment in the workplace, building a portfolio of your skills, and a final <strong>end-point assessment</strong> once you've completed your training.
                             </div>
                         </li>
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> Leads directly to skilled **employment**, or you can progress to higher-level apprenticeships (including Degree Apprenticeships, where you earn a degree without student debt!). <br> <strong>Example:</strong> Rashid started a Level 3 Digital Marketing apprenticeship and now works full-time at a creative agency.
+                                <strong>Progression:</strong> Leads directly to skilled <strong>employment</strong>, or you can progress to higher-level apprenticeships (including Degree Apprenticeships, where you earn a degree without student debt!). <br> <strong>Example:</strong> Rashid started a Level 3 Digital Marketing apprenticeship and now works full-time at a creative agency.
                             </div>
                         </li>
                         <li class="perception">
@@ -687,7 +653,7 @@
                 <h2 class="text-2xl font-bold text-teal-800 mb-2">Work with Training</h2>
                 <p class="text-gray-700 text-lg">Entry-level work combined with part-time learning or qualifications.</p>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info & What People Think:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -830,13 +796,13 @@
 
                 <div class="qr-block">
                     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
-                    <img src="qr_careerpilot.png" alt="Careerpilot QR Code" width="150" height="150">
+                    <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=QR+Code+1" alt="Careerpilot QR Code" width="150" height="150">
                     <p class="text-sm text-gray-600">Scan to explore your options with Careerpilot!</p>
                 </div>
 
                 <div class="qr-block">
                     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
-                    <img src="qr_ncs.png" alt="NCS Careers Quiz QR Code" width="150" height="150">
+                    <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=QR+Code+2" alt="NCS Careers Quiz QR Code" width="150" height="150">
                     <p class="text-sm text-gray-600">Scan for the National Careers Service Skills Assessment.</p>
                 </div>
             </div>
