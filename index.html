@@ -35,7 +35,7 @@
             margin-bottom: 2rem; /* Space between 'sides' for screen view */
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Keep centered for overall page layout */
             justify-content: flex-start; /* Align content to the top within each side */
             page-break-after: always; /* Force a page break after each side when printing */
             page-break-inside: avoid;  /* Prevent splitting a side mid-page */
@@ -53,8 +53,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start; /* Align content to top of card */
-            align-items: center;
-            text-align: center;
+            align-items: center; /* Keep centered for overall card layout */
+            text-align: left; /* Default text alignment for content within card */
         }
         .option-card:hover {
             transform: translateY(-5px);
@@ -82,12 +82,14 @@
             max-height: 0; /* Start collapsed */
             transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin-top 0.3s ease-out;
             opacity: 0;
+            overflow-y: hidden; /* Ensure no scrollbar when collapsed */
         }
         .card-details.expanded {
-            max-height: 500px; /* Adjust as needed to fit content */
+            max-height: 1500px; /* Increased height to ensure all content is visible */
             padding: 0.75rem;
             margin-top: 1rem;
             opacity: 1;
+            overflow-y: auto; /* Add scrollbar if content exceeds max-height */
         }
         .card-details ul {
             list-style: none; /* Remove default bullet */
@@ -288,6 +290,7 @@
                 padding: 0.5rem !important;
                 max-height: fit-content !important; /* Ensure details are visible when printing */
                 opacity: 1 !important;
+                overflow-y: visible !important; /* Ensure content is not cut off in print */
             }
 
             .checkbox-container label {
@@ -357,7 +360,7 @@
             border: 1px solid #90cdf4; /* Light blue border */
         }
         .qr-block {
-            text-align: center;
+            text-align: center; /* Keep centered for visual grouping with QR */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -411,7 +414,7 @@
                 <span class="text-indigo-600">Your Future Unlocked:</span><br>
                 A Student’s Guide to Post-16 Pathways
             </h1>
-            <p id="intro_subheading" class="text-xl text-gray-700 max-w-2xl mx-auto">
+            <p id="intro_subheading" class="text-xl text-gray-800 max-w-2xl mx-auto text-left">
                 Your future after Year 11 is full of pathways and possibilities, this guide can help you understand them and choose what feels right for you.
             </p>
             <button id="printButton" class="btn-primary mt-6">Print Guide</button>
@@ -423,11 +426,11 @@
             <!-- A-levels Card -->
             <div class="option-card bg-sky-100 p-6 rounded-2xl shadow-lg border-b-4 border-sky-400 cursor-pointer" data-pathway="al">
                 <span class="text-6xl mb-4" role="img" aria-label="Compass Icon">🧭</span>
-                <h2 class="text-2xl font-bold text-sky-800 mb-2">A-levels</h2>
-                <p class="text-gray-700 text-lg">Academic subjects, ideal for university routes.</p>
+                <h2 class="text-2xl font-bold text-sky-800 mb-2 text-left">A-levels</h2>
+                <p class="text-gray-800 text-lg text-left">Academic subjects, ideal for university routes.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -450,7 +453,7 @@
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> The main route to <strong>university</strong> (<span class="font-normal italic text-gray-600">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
+                                <strong>Progression:</strong> The main route to <strong>university</strong> (<span class="font-normal italic text-gray-700">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
                             </div>
                         </li>
                         <li class="perception">
@@ -477,11 +480,11 @@
             <!-- BTECs Card -->
             <div class="option-card bg-emerald-100 p-6 rounded-2xl shadow-lg border-b-4 border-emerald-400 cursor-pointer" data-pathway="btec">
                 <span class="text-6xl mb-4" role="img" aria-label="Gear Icon">⚙️</span>
-                <h2 class="text-2xl font-bold text-emerald-800 mb-2">BTECs</h2>
-                <p class="text-gray-700 text-lg">Practical and coursework-based, focusing on vocational skills.</p>
+                <h2 class="text-2xl font-bold text-emerald-800 mb-2 text-left">BTECs</h2>
+                <p class="text-gray-800 text-lg text-left">Practical and coursework-based, focusing on vocational skills.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -506,7 +509,7 @@
                         <li>
                             <span class="icon">➡️</span>
                             <div class="text-content">
-                                <strong>Progression:</strong> Accepted by many <strong>universities</strong> (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and is now studying Nursing at university.
+                                <strong>Progression:</strong> Accepted by many <strong>universities</strong> (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and now studying Nursing at university.
                             </div>
                         </li>
                         <li class="perception">
@@ -533,11 +536,11 @@
             <!-- T-Levels Card -->
             <div class="option-card bg-purple-100 p-6 rounded-2xl shadow-lg border-b-4 border-purple-400 cursor-pointer" data-pathway="tlevel">
                 <span class="text-6xl mb-4" role="img" aria-label="Building Icon">🏢</span>
-                <h2 class="text-2xl font-bold text-purple-800 mb-2">T-Levels</h2>
-                <p class="text-gray-700 text-lg">A mix of classroom learning and significant real work experience.</p>
+                <h2 class="text-2xl font-bold text-purple-800 mb-2 text-left">T-Levels</h2>
+                <p class="text-gray-800 text-lg text-left">A mix of classroom learning and significant real work experience.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -572,7 +575,7 @@
                         <li class="reality">
                             <span class="icon">✨</span>
                             <div class="text-content">
-                                <strong>But actually:</strong> They were designed by employers to give you job-ready skills AND real experience. Many universities (including Russell Group universities - <span class="font-normal italic text-gray-600">these are leading UK universities, known for their research and academic excellence</span>) now accept T-Levels for a wide range of courses!
+                                <strong>But actually:</strong> They were designed by employers to give you job-ready skills AND real experience. Many universities (including Russell Group universities - <span class="font-normal italic text-gray-700">these are leading UK universities, known for their research and academic excellence</span>) now accept T-Levels for a wide range of courses!
                             </div>
                         </li>
                     </ul>
@@ -587,11 +590,11 @@
             <!-- IB (International Baccalaureate) Card -->
             <div class="option-card bg-indigo-100 p-6 rounded-2xl shadow-lg border-b-4 border-indigo-400 cursor-pointer" data-pathway="ib">
                 <span class="text-6xl mb-4" role="img" aria-label="Globe Icon">🌍</span>
-                <h2 class="text-2xl font-bold text-indigo-800 mb-2">IB (International Baccalaureate) Diploma</h2>
-                <p class="text-gray-700 text-lg">Broad academic study with a global focus, often leading to university.</p>
+                <h2 class="text-2xl font-bold text-indigo-800 mb-2 text-left">IB (International Baccalaureate) Diploma</h2>
+                <p class="text-gray-800 text-lg text-left">Broad academic study with a global focus, often leading to university.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -641,11 +644,11 @@
             <!-- Apprenticeships Card -->
             <div class="option-card bg-amber-100 p-6 rounded-2xl shadow-lg border-b-4 border-amber-400 cursor-pointer" data-pathway="app">
                 <span class="text-6xl mb-4" role="img" aria-label="Wrench Icon">🛠️</span>
-                <h2 class="text-2xl font-bold text-amber-800 mb-2">Apprenticeships</h2>
-                <p class="text-gray-700 text-lg">Get paid to learn a job, gaining qualifications along the way.</p>
+                <h2 class="text-2xl font-bold text-amber-800 mb-2 text-left">Apprenticeships</h2>
+                <p class="text-gray-800 text-lg text-left">Get paid to learn a job, gaining qualifications along the way.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -688,18 +691,18 @@
                 <div class="checkbox-container">
                     <label><input type="checkbox" name="app_yes"> Sounds like me!</label>
                     <label><input type="checkbox" name="app_no"> Not quite right</label>
-                    <label><input type="checkbox" name="app_notsure"> Tell me more</label>
+                    <label><input type="checkbox" name="checkbox" name="app_notsure"> Tell me more</label>
                 </div>
             </div>
 
             <!-- Work with Training Card -->
             <div class="option-card bg-teal-100 p-6 rounded-2xl shadow-lg border-b-4 border-teal-400 cursor-pointer" data-pathway="wwt">
                 <span class="text-6xl mb-4" role="img" aria-label="Briefcase with Person Icon">👨‍💼</span>
-                <h2 class="text-2xl font-bold text-teal-800 mb-2">Work with Training</h2>
-                <p class="text-gray-700 text-lg">Entry-level work combined with part-time learning or qualifications.</p>
+                <h2 class="text-2xl font-bold text-teal-800 mb-2 text-left">Work with Training</h2>
+                <p class="text-gray-800 text-lg text-left">Entry-level work combined with part-time learning or qualifications.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
                     <ul>
                         <li>
                             <span class="icon">💡</span>
@@ -748,10 +751,10 @@
         </div>
 
         <!-- Sidenote Box for Other Pathways -->
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-2xl shadow-lg text-sm text-blue-800 mt-8 w-full max-w-5xl mx-auto flex items-start gap-4">
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-2xl shadow-lg text-base text-blue-900 mt-8 w-full max-w-5xl mx-auto flex items-start gap-4 text-left">
             <span class="text-5xl flex-shrink-0" role="img" aria-label="Helping Hands Icon">🤝</span>
             <div>
-                <h3 class="text-xl font-bold text-blue-800 mb-2">Other Tailored Pathways to Consider:</h3>
+                <h3 class="text-xl font-bold text-blue-900 mb-2">Other Tailored Pathways to Consider:</h3>
                 <p class="text-base">
                     For some students, especially if you have an Education, Health and Care Plan (EHCP) or additional needs, there are pathways designed with extra support. These include:
                 </p>
@@ -771,15 +774,15 @@
     <div class="infographic-side">
         <!-- Self-Reflection Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl mb-8 border-t-4 border-gray-300">
-            <p class="text-base text-gray-500 italic mb-4">
+            <p class="text-base text-gray-700 italic mb-4 text-left">
                 💡 There’s no single 'right' answer – your journey is unique! Use these prompts to guide your thinking during our session and afterwards.
             </p>
 
-            <h3 class="text-3xl font-extrabold text-gray-700 mb-6 text-center">Let’s Talk About You!</h3>
-            <h4 class="text-2xl font-bold text-gray-700 mb-6 text-center">Time to Reflect: What Suits YOU?</h4>
+            <h3 class="text-3xl font-extrabold text-gray-900 mb-6 text-left">Let’s Talk About You!</h3>
+            <h4 class="text-2xl font-bold text-gray-900 mb-6 text-left">Time to Reflect: What Suits YOU?</h4>
 
             <div class="reflection-question">
-                <p class="text-xl font-semibold text-gray-600 mb-4 text-center">Tick any that apply: I learn best when I'm...</p>
+                <p class="text-xl font-semibold text-gray-800 mb-4 text-left">Tick any that apply: I learn best when I'm...</p>
                 <div class="reflection-options">
                     <div class="reflection-option">
                         <input type="checkbox" id="learning_doing">
@@ -802,13 +805,13 @@
                         <label for="learning_building">Building or making things</label>
                     </div>
                 </div>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> Think about subjects you enjoy or hobbies you love. How do you learn new skills there?
                 </p>
             </div>
 
             <div class="reflection-question">
-                <p class="text-xl font-semibold text-gray-600 mb-4 text-center">In my future, I would like to...</p>
+                <p class="text-xl font-semibold text-gray-800 mb-4 text-left">In my future, I would like to...</p>
                 <div class="reflection-options">
                     <div class="reflection-option">
                         <input type="checkbox" id="goal_university">
@@ -827,52 +830,52 @@
                         <label for="goal_try_different">Explore different things before committing</label>
                     </div>
                 </div>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> What kind of work would make you feel fulfilled? What impact do you hope to have, big or small?
                 </p>
             </div>
 
-            <p class="mt-6 text-gray-700 text-lg text-center">
+            <p class="mt-6 text-gray-800 text-lg text-left">
                 <strong>If you have additional needs, talk to your careers adviser or SENCO about what support is available at each provider.</strong>
             </p>
 
             <!-- New "Explore More: Career Quizzes" Section -->
-            <<div class="qr-section">
-  <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center w-full">Explore More: Career Quizzes</h3>
+            <div class="qr-section">
+                <h3 class="text-2xl font-bold text-blue-900 mb-4 text-left w-full">Explore More: Career Quizzes</h3>
 
-  <div class="qr-block">
-    <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
-    <a href="https://www.careerpilot.org.uk" target="_blank" class="block">
-      <img src="qr_careerpilot.png" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot">
-    </a>
-    <p class="text-sm text-gray-600">Scan or <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="text-blue-600 hover:underline">click here</a> to explore your options with Careerpilot!</p>
-  </div>
+                <div class="qr-block">
+                    <h4 class="text-lg font-semibold text-gray-900">Try a Career Quiz (Careerpilot)</h4>
+                    <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="block">
+                        <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=qr_careerpilot" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot">
+                    </a>
+                    <p class="text-sm text-gray-800">Scan or <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="text-blue-600 hover:underline">click here</a> to explore your options with Careerpilot!</p>
+                </div>
 
-  <div class="qr-block">
-    <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
-    <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
-      <img src="qr_ncs.png" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service">
-    </a>
-    <p class="text-sm text-gray-600">Scan or <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="text-blue-600 hover:underline">click here</a> for the National Careers Service Skills Assessment.</p>
-  </div>
-</div>
+                <div class="qr-block">
+                    <h4 class="text-lg font-semibold text-gray-900">Try a Career Quiz (National Careers Service)</h4>
+                    <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
+                        <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=qr_ncs" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service">
+                    </a>
+                    <p class="text-sm text-gray-800">Scan or <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="text-blue-600 hover:underline">click here</a> for the National Careers Service Skills Assessment.</p>
+                </div>
+            </div>
         </div>
 
         <!-- Compare and Decide Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl mb-8 border-t-4 border-gray-300">
-            <h3 class="text-3xl font-bold text-gray-700 mb-6 text-center">Compare & Decide</h3>
+            <h3 class="text-3xl font-bold text-gray-900 mb-6 text-left">Compare & Decide</h3>
 
             <div class="mb-6">
-                <p class="text-xl font-semibold text-gray-600 mb-2">Which pathway(s) feel like a good fit for <strong>you</strong> right now? <span class="text-base font-normal text-gray-500 block">(e.g., "I think [Pathway Name] might suit me because...")</span></p>
+                <p class="text-xl font-semibold text-gray-800 mb-2 text-left">Which pathway(s) feel like a good fit for <strong>you</strong> right now? <span class="text-base font-normal text-gray-700 block">(e.g., "I think [Pathway Name] might suit me because...")</span></p>
                 <textarea id="pathway_good_fit" class="fillable-textarea" placeholder="Write your thoughts here..."></textarea>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> Which of these options genuinely excite you? Which ones align with your strengths, even if they seem a little challenging?
                 </p>
             </div>
             <div>
-                <p class="text-xl font-semibold text-gray-600 mb-2">What specific things do you want to learn more about? <span class="text-base font-normal text-gray-500 block">(e.g., "I need to research more about [Pathway Name] and specific courses/employers.")</span></p>
+                <p class="text-xl font-semibold text-gray-800 mb-2 text-left">What specific things do you want to learn more about? <span class="text-base font-normal text-gray-700 block">(e.g., "I need to research more about [Pathway Name] and specific courses/employers.")</span></p>
                 <textarea id="learn_more_about" class="fillable-textarea" placeholder="Write what you need to learn more about..."></textarea>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> What financial, logistical, or long-term questions do you have? Write them down!
                 </p>
             </div>
@@ -880,31 +883,31 @@
 
         <!-- Next Steps Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl border-t-4 border-gray-300">
-            <h3 class="text-3xl font-bold text-gray-700 mb-6 text-center">Your Next Steps</h3>
+            <h3 class="text-3xl font-bold text-gray-900 mb-6 text-left">Your Next Steps</h3>
 
             <div class="mb-6">
-                <p class="text-xl font-semibold text-gray-600 mb-2">My next step is... <span class="text-base font-normal text-gray-500 block">(e.g., "Talk to my careers advisor about...", "Look up colleges offering...", "Search for apprenticeships in...")</span></p>
+                <p class="text-xl font-semibold text-gray-800 mb-2 text-left">My next step is... <span class="text-base font-normal text-gray-700 block">(e.g., "Talk to my careers advisor about...", "Look up colleges offering...", "Search for apprenticeships in...")</span></p>
                 <textarea id="my_next_step" class="fillable-textarea" placeholder="Write your next step here..."></textarea>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> What's one small, practical thing you can do this week to move forward?
                 </p>
             </div>
             <div class="mb-6">
-                <p class="text-xl font-semibold text-gray-600 mb-2">Questions I want to ask to get more information: <span class="text-base font-normal text-gray-500 block">(e.g., "What are the entry requirements?", "What's the assessment like?", "What jobs can this lead to?")</span></p>
+                <p class="text-xl font-semibold text-gray-800 mb-2 text-left">Questions I want to ask to get more information: <span class="text-base font-normal text-gray-700 block">(e.g., "What are the entry requirements?", "What's the assessment like?", "What jobs can this lead to?")</span></p>
                 <textarea id="questions_to_ask" class="fillable-textarea" placeholder="Write your questions here..."></textarea>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> What financial, logistical, or long-term questions do you have? Write them down!
                 </p>
             </div>
             <div>
-                <p class="text-xl font-semibold text-gray-600 mb-2">Who can I talk to for advice and support? <span class="text-base font-normal text-gray-500 block">(e.g., "Careers advisor, teachers, parents, older students, employers.")</span></p>
+                <p class="text-xl font-semibold text-gray-800 mb-2 text-left">Who can I talk to for advice and support? <span class="text-base font-normal text-gray-700 block">(e.g., "Careers advisor, teachers, parents, older students, employers.")</span></p>
                 <textarea id="who_to_talk_to" class="fillable-textarea" placeholder="Write who you can talk to..."></textarea>
-                <p class="text-sm text-gray-500 italic mt-2">
+                <p class="text-sm text-gray-700 italic mt-2 text-left">
                     💡 <strong>Thinking Prompt:</strong> Who in your life (or in your network) could offer valuable insights or encouragement?
                 </p>
             </div>
 
-            <h4 class="text-2xl font-bold text-gray-700 mb-4 mt-8 text-center">My Action Checklist:</h4>
+            <h4 class="text-2xl font-bold text-gray-900 mb-4 mt-8 text-left">My Action Checklist:</h4>
             <div class="flex flex-col items-start space-y-2 max-w-lg mx-auto">
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
                     <input type="checkbox" id="checklist_research_college" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Research a specific college/course
@@ -985,7 +988,7 @@
             'goal_try_different',
             'checklist_research_college',
             'checklist_talk_careers_advisor',
-            'checklist_search_apprentrenticeships',
+            'checklist_search_apprenticeships',
             'checklist_attend_open_day',
             'checklist_speak_teacher',
             'checklist_talk_family_friends',
