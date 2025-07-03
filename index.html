@@ -78,6 +78,16 @@
             padding: 0.75rem; /* Adjusted padding */
             border-radius: 0.75rem;
             border: 1px solid #e2e8f0; /* Softer border */
+            overflow: hidden; /* Hide overflow when collapsed */
+            max-height: 0; /* Start collapsed */
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin-top 0.3s ease-out;
+            opacity: 0;
+        }
+        .card-details.expanded {
+            max-height: 500px; /* Adjust as needed to fit content */
+            padding: 0.75rem;
+            margin-top: 1rem;
+            opacity: 1;
         }
         .card-details ul {
             list-style: none; /* Remove default bullet */
@@ -214,13 +224,27 @@
             color: #166534;
         }
 
-        /* Space for writing/comments */
-        .fillable-line {
+        /* Styles for textareas */
+        .fillable-textarea {
             width: 100%;
-            border-bottom: 2px dashed #94a3b8; /* Dashed line for writing */
+            min-height: 3rem; /* Adjusted height for more writing space */
+            padding: 0.75rem;
             margin-top: 0.5rem;
             margin-bottom: 0.75rem;
-            height: 2rem; /* Increased height for more writing space */
+            border: 1px solid #cbd5e1; /* Soft border */
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #334155;
+            resize: vertical; /* Allow vertical resizing */
+            background-color: #ffffff;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .fillable-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
         }
 
         /* Print-specific adjustments to ensure optimal layout on A4 */
@@ -262,6 +286,8 @@
                 font-size: 0.75rem !important;
                 margin-top: 0.4rem !important;
                 padding: 0.5rem !important;
+                max-height: fit-content !important; /* Ensure details are visible when printing */
+                opacity: 1 !important;
             }
 
             .checkbox-container label {
@@ -285,9 +311,13 @@
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
             }
-            .fillable-line {
-                height: 1rem;
-                margin-bottom: 0.4rem;
+            .fillable-textarea {
+                height: auto !important; /* Allow content to dictate height */
+                min-height: 1rem !important;
+                border: none !important; /* Remove border for cleaner print */
+                background-color: transparent !important;
+                box-shadow: none !important;
+                resize: none !important;
             }
 
             .qr-section {
@@ -306,6 +336,10 @@
             }
             .qr-block h4 { font-size: 1rem !important; }
             .qr-block p { font-size: 0.75rem !important; }
+            .qr-block a {
+                color: #334155 !important; /* Make links black for print */
+                text-decoration: none !important; /* Remove underline for print */
+            }
         }
         /* Styling for the new QR code section */
         .qr-section {
@@ -360,6 +394,11 @@
                 max-width: 45%; /* Max width to allow two per row */
             }
         }
+
+        /* Button styling */
+        .btn-primary {
+            @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200 ease-in-out transform hover:scale-105;
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen">
@@ -372,9 +411,10 @@
                 <span class="text-indigo-600">Your Future Unlocked:</span><br>
                 A Student’s Guide to Post-16 Pathways
             </h1>
-            <p class="text-xl text-gray-700 max-w-2xl mx-auto">
-                There are lots of different ways to move forward after Year 11 – this guide will help you explore which ones might suit <strong>you</strong>.
+            <p id="intro_subheading" class="text-xl text-gray-700 max-w-2xl mx-auto">
+                Your future after Year 11 is full of pathways and possibilities, this guide can help you understand them and choose what feels right for you.
             </p>
+            <button id="printButton" class="btn-primary mt-6">Print Guide</button>
         </div>
 
         <!-- Visual Summary of Post-16 Pathways Grid -->
@@ -385,6 +425,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Compass Icon">🧭</span>
                 <h2 class="text-2xl font-bold text-sky-800 mb-2">A-levels</h2>
                 <p class="text-gray-700 text-lg">Academic subjects, ideal for university routes.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -438,6 +479,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Gear Icon">⚙️</span>
                 <h2 class="text-2xl font-bold text-emerald-800 mb-2">BTECs</h2>
                 <p class="text-gray-700 text-lg">Practical and coursework-based, focusing on vocational skills.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -493,6 +535,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Building Icon">🏢</span>
                 <h2 class="text-2xl font-bold text-purple-800 mb-2">T-Levels</h2>
                 <p class="text-gray-700 text-lg">A mix of classroom learning and significant real work experience.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -546,6 +589,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Globe Icon">🌍</span>
                 <h2 class="text-2xl font-bold text-indigo-800 mb-2">IB (International Baccalaureate) Diploma</h2>
                 <p class="text-gray-700 text-lg">Broad academic study with a global focus, often leading to university.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -599,6 +643,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Wrench Icon">🛠️</span>
                 <h2 class="text-2xl font-bold text-amber-800 mb-2">Apprenticeships</h2>
                 <p class="text-gray-700 text-lg">Get paid to learn a job, gaining qualifications along the way.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -652,6 +697,7 @@
                 <span class="text-6xl mb-4" role="img" aria-label="Briefcase with Person Icon">👨‍💼</span>
                 <h2 class="text-2xl font-bold text-teal-800 mb-2">Work with Training</h2>
                 <p class="text-gray-700 text-lg">Entry-level work combined with part-time learning or qualifications.</p>
+                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
                     <h4 class="font-bold text-gray-800 mb-2">Key Info:</h4>
                     <ul>
@@ -796,14 +842,18 @@
 
                 <div class="qr-block">
                     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
-                    <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=QR+Code+1" alt="Careerpilot QR Code" width="150" height="150">
-                    <p class="text-sm text-gray-600">Scan to explore your options with Careerpilot!</p>
+                    <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="block">
+                        <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=qr_careerpilot" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot">
+                    </a>
+                    <p class="text-sm text-gray-600">Scan or <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="text-blue-600 hover:underline">click here</a> to explore your options with Careerpilot!</p>
                 </div>
 
                 <div class="qr-block">
                     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
-                    <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=QR+Code+2" alt="NCS Careers Quiz QR Code" width="150" height="150">
-                    <p class="text-sm text-gray-600">Scan for the National Careers Service Skills Assessment.</p>
+                    <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
+                        <img src="https://placehold.co/150x150/E0F2FE/1E3A8A?text=qr_ncs" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service">
+                    </a>
+                    <p class="text-sm text-gray-600">Scan or <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="text-blue-600 hover:underline">click here</a> for the National Careers Service Skills Assessment.</p>
                 </div>
             </div>
         </div>
@@ -814,16 +864,14 @@
 
             <div class="mb-6">
                 <p class="text-xl font-semibold text-gray-600 mb-2">Which pathway(s) feel like a good fit for <strong>you</strong> right now? <span class="text-base font-normal text-gray-500 block">(e.g., "I think [Pathway Name] might suit me because...")</span></p>
-                <div class="fillable-line"></div>
-                <div class="fillable-line"></div>
+                <textarea id="pathway_good_fit" class="fillable-textarea" placeholder="Write your thoughts here..."></textarea>
                 <p class="text-sm text-gray-500 italic mt-2">
                     💡 <strong>Thinking Prompt:</strong> Which of these options genuinely excite you? Which ones align with your strengths, even if they seem a little challenging?
                 </p>
             </div>
             <div>
                 <p class="text-xl font-semibold text-gray-600 mb-2">What specific things do you want to learn more about? <span class="text-base font-normal text-gray-500 block">(e.g., "I need to research more about [Pathway Name] and specific courses/employers.")</span></p>
-                <div class="fillable-line"></div>
-                <div class="fillable-line"></div>
+                <textarea id="learn_more_about" class="fillable-textarea" placeholder="Write what you need to learn more about..."></textarea>
                 <p class="text-sm text-gray-500 italic mt-2">
                     💡 <strong>Thinking Prompt:</strong> What financial, logistical, or long-term questions do you have? Write them down!
                 </p>
@@ -836,24 +884,21 @@
 
             <div class="mb-6">
                 <p class="text-xl font-semibold text-gray-600 mb-2">My next step is... <span class="text-base font-normal text-gray-500 block">(e.g., "Talk to my careers advisor about...", "Look up colleges offering...", "Search for apprenticeships in...")</span></p>
-                <div class="fillable-line"></div>
-                <div class="fillable-line"></div>
+                <textarea id="my_next_step" class="fillable-textarea" placeholder="Write your next step here..."></textarea>
                 <p class="text-sm text-gray-500 italic mt-2">
                     💡 <strong>Thinking Prompt:</strong> What's one small, practical thing you can do this week to move forward?
                 </p>
             </div>
             <div class="mb-6">
                 <p class="text-xl font-semibold text-gray-600 mb-2">Questions I want to ask to get more information: <span class="text-base font-normal text-gray-500 block">(e.g., "What are the entry requirements?", "What's the assessment like?", "What jobs can this lead to?")</span></p>
-                <div class="fillable-line"></div>
-                <div class="fillable-line"></div>
+                <textarea id="questions_to_ask" class="fillable-textarea" placeholder="Write your questions here..."></textarea>
                 <p class="text-sm text-gray-500 italic mt-2">
                     💡 <strong>Thinking Prompt:</strong> What financial, logistical, or long-term questions do you have? Write them down!
                 </p>
             </div>
             <div>
                 <p class="text-xl font-semibold text-gray-600 mb-2">Who can I talk to for advice and support? <span class="text-base font-normal text-gray-500 block">(e.g., "Careers advisor, teachers, parents, older students, employers.")</span></p>
-                <div class="fillable-line"></div>
-                <div class="fillable-line"></div>
+                <textarea id="who_to_talk_to" class="fillable-textarea" placeholder="Write who you can talk to..."></textarea>
                 <p class="text-sm text-gray-500 italic mt-2">
                     💡 <strong>Thinking Prompt:</strong> Who in your life (or in your network) could offer valuable insights or encouragement?
                 </p>
@@ -862,27 +907,102 @@
             <h4 class="text-2xl font-bold text-gray-700 mb-4 mt-8 text-center">My Action Checklist:</h4>
             <div class="flex flex-col items-start space-y-2 max-w-lg mx-auto">
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Research a specific college/course
+                    <input type="checkbox" id="checklist_research_college" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Research a specific college/course
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Talk to my careers advisor
+                    <input type="checkbox" id="checklist_talk_careers_advisor" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Talk to my careers advisor
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Search for apprenticeships on gov.uk
+                    <input type="checkbox" id="checklist_search_apprenticeships" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Search for apprenticeships on gov.uk
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Attend a college open day/virtual event
+                    <input type="checkbox" id="checklist_attend_open_day" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Attend a college open day/virtual event
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Speak to a teacher about my options
+                    <input type="checkbox" id="checklist_speak_teacher" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Speak to a teacher about my options
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Talk to family/friends who work in interesting fields
+                    <input type="checkbox" id="checklist_talk_family_friends" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Talk to family/friends who work in interesting fields
                 </label>
                 <label class="flex items-center gap-2 text-base text-gray-700 cursor-pointer">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Take an online careers quiz
+                    <input type="checkbox" id="checklist_take_quiz" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-400 focus:ring-blue-500"> Take an online careers quiz
                 </label>
             </div>
         </div>    
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Print Button ---
+        document.getElementById('printButton').addEventListener('click', () => {
+            window.print();
+        });
+
+        // --- Local Storage for Textareas ---
+        const textareas = [
+            'pathway_good_fit',
+            'learn_more_about',
+            'my_next_step',
+            'questions_to_ask',
+            'who_to_talk_to'
+        ];
+
+        textareas.forEach(id => {
+            const textarea = document.getElementById(id);
+            if (textarea) {
+                // Load saved text
+                textarea.value = localStorage.getItem(id) || '';
+                // Save text on input
+                textarea.addEventListener('input', () => {
+                    localStorage.setItem(id, textarea.value);
+                });
+            }
+        });
+
+        // --- Toggle Card Details ---
+        document.querySelectorAll('.toggle-details-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const cardDetails = button.nextElementSibling; // Assuming .card-details is the next sibling
+                if (cardDetails.classList.contains('expanded')) {
+                    cardDetails.classList.remove('expanded');
+                    button.textContent = 'Show Details';
+                } else {
+                    cardDetails.classList.add('expanded');
+                    button.textContent = 'Hide Details';
+                }
+            });
+        });
+
+        // --- Local Storage for Checkboxes ---
+        const checkboxes = [
+            'learning_doing',
+            'learning_writing',
+            'learning_talking',
+            'learning_watching',
+            'learning_building',
+            'goal_university',
+            'goal_earn_money',
+            'goal_real_experience',
+            'goal_try_different',
+            'checklist_research_college',
+            'checklist_talk_careers_advisor',
+            'checklist_search_apprentrenticeships',
+            'checklist_attend_open_day',
+            'checklist_speak_teacher',
+            'checklist_talk_family_friends',
+            'checklist_take_quiz'
+        ];
+
+        checkboxes.forEach(id => {
+            const checkbox = document.getElementById(id);
+            if (checkbox) {
+                // Load saved state
+                checkbox.checked = (localStorage.getItem(id) === 'true');
+                // Save state on change
+                checkbox.addEventListener('change', () => {
+                    localStorage.setItem(id, checkbox.checked);
+                });
+            }
+        });
+    });
+</script>
 </html>
