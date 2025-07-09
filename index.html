@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -401,6 +401,67 @@
         /* Button styling */
         .btn-primary {
             @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200 ease-in-out transform hover:scale-105;
+        }
+
+        /* Mobile-friendly and print-friendly CSS styles */
+        .qr-code-box {
+            width: 120px; /* Fixed width */
+            height: 120px; /* Fixed height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem; /* Inner padding */
+            border: 1px solid #e2e8f0; /* Soft border */
+            border-radius: 0.5rem;
+            background-color: #f8fafc;
+        }
+
+        .qr-code-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Screen-only styles for smaller devices */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .infographic-side {
+                min-height: auto; /* Allow height to be determined by content */
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            h1, .text-6xl { font-size: 2.5rem !important; }
+            h2, .text-4xl { font-size: 1.75rem !important; }
+            .option-card { padding: 1rem !important; }
+        }
+
+        /* Print-specific adjustments to ensure optimal layout on A4 */
+        @media print {
+            #printButton, .toggle-details-btn {
+                display: none !important; /* Hide buttons */
+            }
+
+            .card-details {
+                max-height: none !important; /* Ensure all details are visible */
+                opacity: 1 !important;
+                padding: 0.5rem !important;
+                margin-top: 0.5rem !important;
+            }
+
+            .infographic-side {
+                width: 100%;
+                max-width: 100%;
+                min-height: auto;
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+                margin-bottom: 0;
+                border: none;
+            }
         }
     </style>
 </head>
@@ -1023,11 +1084,9 @@
             }
         });
     });
-</script>
-
-<footer class="text-center text-xs text-gray-500 mt-8">
+    <footer class="text-center text-xs text-gray-500 mt-8">
   © 2025 Futures Unlocked | Developed by S.N.Hekim
 </footer>
 
-</body>
+</script>
 </html>
