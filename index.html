@@ -68,27 +68,28 @@
 
         /* Styles for detailed info within cards */
         .card-details {
-            background-color: #fefefe;
-            border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
+            font-size: 0.95rem; /* Slightly larger font for better readability */
             margin-top: 1rem;
-            transition: max-height 0.35s ease-out, opacity 0.35s ease-out;
-        }
-
-        .card-details-inner {
-            padding: 0.75rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #334155;
+            line-height: 1.6; /* Adjusted line height for comfort */
+            color: #334155; /* Slightly darker text for better contrast */
             text-align: left;
             width: 100%;
+            background-color: #fefefe; /* Slightly whiter background for clarity */
+            padding: 0.75rem; /* Adjusted padding */
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0; /* Softer border */
+            overflow: hidden; /* Hide overflow when collapsed */
+            max-height: 0; /* Start collapsed */
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin-top 0.3s ease-out;
+            opacity: 0;
+            overflow-y: hidden; /* Ensure no scrollbar when collapsed */
         }
         .card-details.expanded {
-            max-height: 1500px;
+            max-height: 1500px; /* Increased height to ensure all content is visible */
+            padding: 0.75rem;
+            margin-top: 1rem;
             opacity: 1;
+            overflow-y: auto; /* Add scrollbar if content exceeds max-height */
         }
         .card-details ul {
             list-style: none; /* Remove default bullet */
@@ -401,67 +402,6 @@
         .btn-primary {
             @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200 ease-in-out transform hover:scale-105;
         }
-
-        /* Mobile-friendly and print-friendly CSS styles */
-        .qr-code-box {
-            width: 120px; /* Fixed width */
-            height: 120px; /* Fixed height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0.5rem; /* Inner padding */
-            border: 1px solid #e2e8f0; /* Soft border */
-            border-radius: 0.5rem;
-            background-color: #f8fafc;
-        }
-
-        .qr-code-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* Screen-only styles for smaller devices */
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .infographic-side {
-                min-height: auto; /* Allow height to be determined by content */
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-            .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-            h1, .text-6xl { font-size: 2.5rem !important; }
-            h2, .text-4xl { font-size: 1.75rem !important; }
-            .option-card { padding: 1rem !important; }
-        }
-
-        /* Print-specific adjustments to ensure optimal layout on A4 */
-        @media print {
-            #printButton, .toggle-details-btn {
-                display: none !important; /* Hide buttons */
-            }
-
-            .card-details {
-                max-height: none !important; /* Ensure all details are visible */
-                opacity: 1 !important;
-                padding: 0.5rem !important;
-                margin-top: 0.5rem !important;
-            }
-
-            .infographic-side {
-                width: 100%;
-                max-width: 100%;
-                min-height: auto;
-                padding: 0;
-                box-shadow: none;
-                border-radius: 0;
-                margin-bottom: 0;
-                border: none;
-            }
-        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen">
@@ -490,47 +430,45 @@
                 <p class="text-gray-800 text-lg text-left">Academic subjects, ideal for university routes.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> A 2-year academic deep dive into 3–4 subjects you choose.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong> Usually 5 GCSEs at grade 4 (C) or above, including English and Maths. Some subjects might need higher grades.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✍️</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> Mostly <strong>final exams</strong> at the end of the two years, with some coursework in certain subjects.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> The main route to <strong>university</strong> (<span class="font-normal italic text-gray-700">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "A-levels are <strong>only</strong> for university" or "they're <strong>too</strong> academic and not for everyone."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> They help you develop strong analytical and critical thinking skills, opening up many diverse university courses and career paths. Not the <strong>only</strong> way to get to uni!
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
+                    <ul>
+                        <li>
+                            <span class="icon">💡</span>
+                            <div class="text-content">
+                                <strong>What:</strong> A 2-year academic deep dive into 3–4 subjects you choose.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✅</span>
+                            <div class="text-content">
+                                <strong>Entry:</strong> Usually 5 GCSEs at grade 4 (C) or above, including English and Maths. Some subjects might need higher grades.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✍️</span>
+                            <div class="text-content">
+                                <strong>Assessment:</strong> Mostly <strong>final exams</strong> at the end of the two years, with some coursework in certain subjects.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">➡️</span>
+                            <div class="text-content">
+                                <strong>Progression:</strong> The main route to <strong>university</strong> (<span class="font-normal italic text-gray-700">Russell Group universities are leading UK universities, known for their research and academic excellence</span>), also Higher or Degree Apprenticeships.
+                            </div>
+                        </li>
+                        <li class="perception">
+                            <span class="icon">🤔</span>
+                            <div class="text-content">
+                                <strong>What some people might think:</strong> "A-levels are <strong>only</strong> for university" or "they're <strong>too</strong> academic and not for everyone."
+                            </div>
+                        </li>
+                        <li class="reality">
+                            <span class="icon">✨</span>
+                            <div class="text-content">
+                                <strong>But actually:</strong> They help you develop strong analytical and critical thinking skills, opening up many diverse university courses and career paths. Not the <strong>only</strong> way to get to uni!
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="checkbox-container">
                     <label><input type="checkbox" name="al_yes"> Sounds like me!</label>
@@ -546,49 +484,47 @@
                 <p class="text-gray-800 text-lg text-left">Practical and coursework-based, focusing on vocational skills.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> Applied learning in specific sectors like Health, Business, or Sport. You learn by doing, often focusing on real-world projects. <br> <strong>Note:</strong> BTEC qualifications are evolving! While many BTECs are being updated or replaced by exciting new options like T-Levels from 2026, existing courses remain valid. Your college or careers advisor can give you the latest info on what's available.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong>
-                                    <br> - <strong>Level 2 (e.g., Extended Certificate):</strong> Often 4 GCSEs at grade 3 (D) or above.
-                                    <br> - <strong>Level 3 (e.g., Extended Diploma):</strong> Usually 5 GCSEs at grade 4 (C) or above, including English and Maths. Entry requirements can vary by college and course – always check the provider’s website!
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">📋</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> Mainly <strong>coursework and projects</strong>, with some exams or practical assessments. It’s more continuous assessment.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> Accepted by many <strong>universities</strong> (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and now studying Nursing at university.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "BTECs are 'easier' than A-levels" or "they're not for uni if you want a good one."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> They are rigorous and develop valuable real-world skills. They're great if you prefer continuous assessment and practical application, and many universities accept them!
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
+                    <ul>
+                        <li>
+                            <span class="icon">💡</span>
+                            <div class="text-content">
+                                <strong>What:</strong> Applied learning in specific sectors like Health, Business, or Sport. You learn by doing, often focusing on real-world projects. <br> <strong>Note:</strong> BTEC qualifications are evolving! While many BTECs are being updated or replaced by exciting new options like T-Levels from 2026, existing courses remain valid. Your college or careers advisor can give you the latest info on what's available.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✅</span>
+                            <div class="text-content">
+                                <strong>Entry:</strong>
+                                <br> - <strong>Level 2 (e.g., Extended Certificate):</strong> Often 4 GCSEs at grade 3 (D) or above.
+                                <br> - <strong>Level 3 (e.g., Extended Diploma):</strong> Usually 5 GCSEs at grade 4 (C) or above, including English and Maths. Entry requirements can vary by college and course – always check the provider’s website!
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">📋</span>
+                            <div class="text-content">
+                                <strong>Assessment:</strong> Mainly <strong>coursework and projects</strong>, with some exams or practical assessments. It’s more continuous assessment.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">➡️</span>
+                            <div class="text-content">
+                                <strong>Progression:</strong> Accepted by many <strong>universities</strong> (equivalent to 1-3 A-levels, depending on the BTEC), apprenticeships, or direct employment. <br> <strong>Example:</strong> Ellie took a BTEC in Health & Social Care and now studying Nursing at university.
+                            </div>
+                        </li>
+                        <li class="perception">
+                            <span class="icon">🤔</span>
+                            <div class="text-content">
+                                <strong>What some people might think:</strong> "BTECs are 'easier' than A-levels" or "they're not for uni if you want a good one."
+                            </div>
+                        </li>
+                        <li class="reality">
+                            <span class="icon">✨</span>
+                            <div class="text-content">
+                                <strong>But actually:</strong> They are rigorous and develop valuable real-world skills. They're great if you prefer continuous assessment and practical application, and many universities accept them!
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="checkbox-container">
                     <label><input type="checkbox" name="btec_yes"> Sounds like me!</label>
@@ -599,52 +535,50 @@
 
             <!-- T-Levels Card -->
             <div class="option-card bg-purple-100 p-6 rounded-2xl shadow-lg border-b-4 border-purple-400 cursor-pointer" data-pathway="tlevel">
-                <span class="text-6xl mb-4" role="img" aria-label="Blueprint and Gear Icon">🛠️</span>
+                <span class="text-6xl mb-4" role="img" aria-label="Building Icon">🏢</span>
                 <h2 class="text-2xl font-bold text-purple-800 mb-2 text-left">T-Levels</h2>
                 <p class="text-gray-800 text-lg text-left">A mix of classroom learning and significant real work experience.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> Brand new 2-year technical programmes. You spend 80% of your time in the classroom learning core theory and specialist skills, and 20% on a substantial industry placement (at least 45 days!).
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong> Typically 5 GCSEs at grade 4 (C) or above, including English & Maths.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">📋</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> A mix of exams, practical assessments, and a big <strong>employer-set project</strong> based on real-world scenarios.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> They're equivalent to <strong>3 A-levels</strong> and are accepted by many universities for relevant degrees, or you can go straight into skilled employment or higher apprenticeships.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "T-Levels are <strong>only</strong> for those who don't want to go to university."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> They were designed by employers to give you job-ready skills AND real experience. Many universities (including Russell Group universities - <span class="font-normal italic text-gray-700">these are leading UK universities, known for their research and academic excellence</span>) now accept T-Levels for a wide range of courses!
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
+                    <ul>
+                        <li>
+                            <span class="icon">💡</span>
+                            <div class="text-content">
+                                <strong>What:</strong> Brand new 2-year technical programmes. You spend 80% of your time in the classroom learning core theory and specialist skills, and 20% on a substantial industry placement (at least 45 days!).
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✅</span>
+                            <div class="text-content">
+                                <strong>Entry:</strong> Typically 5 GCSEs at grade 4 (C) or above, including English & Maths.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">📋</span>
+                            <div class="text-content">
+                                <strong>Assessment:</strong> A mix of exams, practical assessments, and a big <strong>employer-set project</strong> based on real-world scenarios.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">➡️</span>
+                            <div class="text-content">
+                                <strong>Progression:</strong> They're equivalent to <strong>3 A-levels</strong> and are accepted by many universities for relevant degrees, or you can go straight into skilled employment or higher apprenticeships.
+                            </div>
+                        </li>
+                        <li class="perception">
+                            <span class="icon">🤔</span>
+                            <div class="text-content">
+                                <strong>What some people might think:</strong> "T-Levels are <strong>only</strong> for those who don't want to go to university."
+                            </div>
+                        </li>
+                        <li class="reality">
+                            <span class="icon">✨</span>
+                            <div class="text-content">
+                                <strong>But actually:</strong> They were designed by employers to give you job-ready skills AND real experience. Many universities (including Russell Group universities - <span class="font-normal italic text-gray-700">these are leading UK universities, known for their research and academic excellence</span>) now accept T-Levels for a wide range of courses!
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="checkbox-container">
                     <label><input type="checkbox" name="tlevel_yes"> Sounds like me!</label>
@@ -653,173 +587,114 @@
                 </div>
             </div>
 
-            <!-- Cambridge Technicals Card -->
-            <div class="option-card bg-red-100 p-6 rounded-2xl shadow-lg border-b-4 border-red-400 cursor-pointer" data-pathway="ctec">
-                <span class="text-6xl mb-4" role="img" aria-label="Lightbulb with Gears Icon">⚙️</span>
-                <h2 class="text-2xl font-bold text-red-800 mb-2 text-left">Cambridge Technicals</h2>
-                <p class="text-gray-800 text-lg text-left">Vocational qualifications for specific career paths.</p>
+            <!-- IB (International Baccalaureate) Card -->
+            <div class="option-card bg-indigo-100 p-6 rounded-2xl shadow-lg border-b-4 border-indigo-400 cursor-pointer" data-pathway="ib">
+                <span class="text-6xl mb-4" role="img" aria-label="Globe Icon">🌍</span>
+                <h2 class="text-2xl font-bold text-indigo-800 mb-2 text-left">IB (International Baccalaureate) Diploma</h2>
+                <p class="text-gray-800 text-lg text-left">Broad academic study with a global focus, often leading to university.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> Similar to BTECs, these are vocational qualifications that help you develop practical skills for specific industries like IT, Health, or Media.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong> Similar to BTECs, entry requirements vary by level and college.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">📋</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> A mix of exams and coursework, focusing on practical application.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> Accepted by many universities and employers.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "They're just another type of BTEC."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> They are awarded by OCR (a different exam board) and are highly respected. They offer another great route for practical, hands-on learners.
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
+                    <ul>
+                        <li>
+                            <span class="icon">💡</span>
+                            <div class="text-content">
+                                <strong>What:</strong> A global 2-year diploma where you study 6 subjects (3 at Higher Level, 3 at Standard Level) plus a core of extended essay writing, a Theory of Knowledge course, and creativity, activity, service (CAS) projects. <br> <strong>Note:</strong> Not all schools/colleges offer the IB Diploma, so availability varies by location.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✅</span>
+                            <div class="text-content">
+                                <strong>Entry:</strong> Generally requires high GCSE grades across a range of subjects (varies by school/college).
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✍️</span>
+                            <div class="text-content">
+                                <strong>Assessment:</strong> A good mix of <strong>final exams and internal assessments</strong> throughout the course (e.g., essays, presentations, practicals).
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">➡️</span>
+                            <div class="text-content">
+                                <strong>Progression:</strong> Highly valued for <strong>university</strong> entry worldwide (including top UK universities) because it shows a broad education and strong critical thinking skills.
+                            </div>
+                        </li>
+                        <li class="perception">
+                            <span class="icon">🤔</span>
+                            <div class="text-content">
+                                <strong>What some people might think:</strong> "It's <strong>only</strong> for international students" or "it's <strong>too</strong> difficult and stressful."
+                            </div>
+                        </li>
+                        <li class="reality">
+                            <span class="icon">✨</span>
+                            <div class="text-content">
+                                <strong>But actually:</strong> It provides an excellent all-round education, prepares you really well for university, and gives you a fantastic global perspective.
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="checkbox-container">
-                    <label><input type="checkbox" name="ctec_yes"> Sounds like me!</label>
-                    <label><input type="checkbox" name="ctec_no"> Not quite right</label>
-                    <label><input type="checkbox" name="ctec_notsure"> Tell me more</label>
+                    <label><input type="checkbox" name="ib_yes"> Sounds like me!</label>
+                    <label><input type="checkbox" name="ib_no"> Not quite right</label>
+                    <label><input type="checkbox" name="ib_notsure"> Tell me more</label>
                 </div>
             </div>
 
             <!-- Apprenticeships Card -->
-            <div class="option-card bg-green-100 p-6 rounded-2xl shadow-lg border-b-4 border-green-400 cursor-pointer" data-pathway="app">
-                <span class="text-6xl mb-4" role="img" aria-label="Wrench and Graduation Cap Icon">🎓</span>
-                <h2 class="text-2xl font-bold text-green-800 mb-2 text-left">Apprenticeships</h2>
-                <p class="text-gray-800 text-lg text-left">Earn while you learn in a real job with training.</p>
+            <div class="option-card bg-amber-100 p-6 rounded-2xl shadow-lg border-b-4 border-amber-400 cursor-pointer" data-pathway="app">
+                <span class="text-6xl mb-4" role="img" aria-label="Wrench Icon">🛠️</span>
+                <h2 class="text-2xl font-bold text-amber-800 mb-2 text-left">Apprenticeships</h2>
+                <p class="text-gray-800 text-lg text-left">Get paid to learn a job, gaining qualifications along the way.</p>
                 <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
                 <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> A real job with a real salary, combined with structured training (at least 20% of your time is spent on 'off-the-job' study). They come in various levels, from Level 2 (equivalent to GCSEs) all the way up to Level 7 (equivalent to a Master's degree!).
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong> Entry requirements vary hugely by the level of the apprenticeship and the employer. Some need specific GCSEs, others focus more on your attitude and potential.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">📋</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> Continuous assessment in the workplace, building a portfolio of your skills, and a final <strong>end-point assessment</strong> once you've completed your training.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> Leads directly to skilled <strong>employment</strong>, or you can progress to higher-level apprenticeships (including Degree Apprenticeships, where you earn a degree without student debt!). <br> <strong>Example:</strong> Rashid started a Level 3 Digital Marketing apprenticeship and now works full-time at a creative agency.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "Apprenticeships are <strong>only</strong> for manual trades" or "they're less academic and won't get me far."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> They are available in hundreds of industries (think tech, finance, law, creative arts, healthcare!). They offer a fantastic way to gain valuable work experience and a qualification, sometimes even a degree, without university debt.
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
+                    <ul>
+                        <li>
+                            <span class="icon">💡</span>
+                            <div class="text-content">
+                                <strong>What:</strong> A real job with a real salary, combined with structured training (at least 20% of your time is spent on 'off-the-job' study). They come in various levels, from Level 2 (equivalent to GCSEs) all the way up to Level 7 (equivalent to a Master's degree!).
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">✅</span>
+                            <div class="text-content">
+                                <strong>Entry:</strong> Entry requirements vary hugely by the level of the apprenticeship and the employer. Some need specific GCSEs, others focus more on your attitude and potential.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">📋</span>
+                            <div class="text-content">
+                                <strong>Assessment:</strong> Continuous assessment in the workplace, building a portfolio of your skills, and a final <strong>end-point assessment</strong> once you've completed your training.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="icon">➡️</span>
+                            <div class="text-content">
+                                <strong>Progression:</strong> Leads directly to skilled <strong>employment</strong>, or you can progress to higher-level apprenticeships (including Degree Apprenticeships, where you earn a degree without student debt!). <br> <strong>Example:</strong> Rashid started a Level 3 Digital Marketing apprenticeship and now works full-time at a creative agency.
+                            </div>
+                        </li>
+                        <li class="perception">
+                            <span class="icon">🤔</span>
+                            <div class="text-content">
+                                <strong>What some people might think:</strong> "Apprenticeships are <strong>only</strong> for manual trades" or "they're less academic and won't get me far."
+                            </div>
+                        </li>
+                        <li class="reality">
+                            <span class="icon">✨</span>
+                            <div class="text-content">
+                                <strong>But actually:</strong> They are available in hundreds of industries (think tech, finance, law, creative arts, healthcare!). They offer a fantastic way to gain valuable work experience and a qualification, sometimes even a degree, without university debt.
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="checkbox-container">
                     <label><input type="checkbox" name="app_yes"> Sounds like me!</label>
                     <label><input type="checkbox" name="app_no"> Not quite right</label>
-                    <label><input type="checkbox" name="app_notsure"> Tell me more</label>
+                    <label><input type="checkbox" name="checkbox" name="app_notsure"> Tell me more</label>
                 </div>
             </div>
 
-            <!-- Work with Training Card -->
-            <div class="option-card bg-teal-100 p-6 rounded-2xl shadow-lg border-b-4 border-teal-400 cursor-pointer" data-pathway="wwt">
-                <span class="text-6xl mb-4" role="img" aria-label="Briefcase with Person Icon">👨‍💼</span>
-                <h2 class="text-2xl font-bold text-teal-800 mb-2 text-left">Work with Training</h2>
-                <p class="text-gray-800 text-lg text-left">Entry-level work combined with part-time learning or qualifications.</p>
-                <button class="toggle-details-btn bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm mt-4 hover:bg-blue-300 transition-colors">Show Details</button>
-                <div class="card-details">
-                    <div class="card-details-inner">
-                        <h4 class="font-bold text-gray-800 mb-2 text-left">Key Info:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon">💡</span>
-                                <div class="text-content">
-                                    <strong>What:</strong> This could be direct employment (paid or voluntary) combined with part-time college courses or employer-led training programmes (like Supported Internships).
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">✅</span>
-                                <div class="text-content">
-                                    <strong>Entry:</strong> Varies widely depending on the specific job or training. Often, they focus on your enthusiasm and basic literacy/numeracy skills.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">📋</span>
-                                <div class="text-content">
-                                    <strong>Assessment:</strong> Could include vocational assessments, assignments, or working towards essential GCSEs or Functional Skills qualifications.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon">➡️</span>
-                                <div class="text-content">
-                                    <strong>Progression:</strong> Helps you build immediate work experience and practical skills. It can be a stepping stone to an apprenticeship, further education, or direct career progression within a company.
-                                </div>
-                            </li>
-                            <li class="perception">
-                                <span class="icon">🤔</span>
-                                <div class="text-content">
-                                    <strong>What some people might think:</strong> "It's just a job, not a proper career pathway."
-                                </div>
-                            </li>
-                            <li class="reality">
-                                <span class="icon">✨</span>
-                                <div class="text-content">
-                                    <strong>But actually:</strong> It's a great way to gain independence quickly and develop valuable practical skills. These pathways often include support for improving essential skills like English and Maths, which can open many doors for your future.
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="checkbox-container">
-                    <label><input type="checkbox" name="wwt_yes"> Sounds like me!</label>
-                    <label><input type="checkbox" name="wwt_no"> Not quite right</label>
-                    <label><input type="checkbox" name="wwt_notsure"> Tell me more</label>
-                </div>
-            </div>
             <!-- Work with Training Card -->
             <div class="option-card bg-teal-100 p-6 rounded-2xl shadow-lg border-b-4 border-teal-400 cursor-pointer" data-pathway="wwt">
                 <span class="text-6xl mb-4" role="img" aria-label="Briefcase with Person Icon">👨‍💼</span>
@@ -1105,13 +980,11 @@
         // --- Toggle Card Details ---
         document.querySelectorAll('.toggle-details-btn').forEach(button => {
             button.addEventListener('click', () => {
-                const card = button.closest('.option-card'); // Find the parent card
-                const cardDetails = card.querySelector('.card-details'); // Find the details within the card
-
-                if (cardDetails && cardDetails.classList.contains('expanded')) {
+                const cardDetails = button.nextElementSibling; // Assuming .card-details is the next sibling
+                if (cardDetails.classList.contains('expanded')) {
                     cardDetails.classList.remove('expanded');
                     button.textContent = 'Show Details';
-                } else if (cardDetails) {
+                } else {
                     cardDetails.classList.add('expanded');
                     button.textContent = 'Hide Details';
                 }
@@ -1150,9 +1023,11 @@
             }
         });
     });
-    <footer class="text-center text-xs text-gray-500 mt-8">
+</script>
+
+<footer class="text-center text-xs text-gray-500 mt-8">
   © 2025 Futures Unlocked | Developed by S.N.Hekim
 </footer>
 
-</script>
+</body>
 </html>
