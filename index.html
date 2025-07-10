@@ -251,141 +251,34 @@
 
         /* Print-specific adjustments to ensure optimal layout on A4 */
         @media print {
-            body {
-                padding: 0;
-                margin: 0;
-                min-height: auto;
-                justify-content: flex-start;
-            }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
-            .infographic-side {
-                width: 100%;
-                height: 210mm;         /* Exact A4 landscape height */
-                max-height: 210mm;     /* Prevent overflow */
-                max-width: 297mm;      /* Exact A4 landscape width */
-                overflow: hidden;      /* Prevent spillover */
-                box-shadow: none;
-                border-radius: 0;
-                margin-bottom: 0;
-                padding: 1rem;         /* Tighter padding for print */
-                page-break-after: always;
-                page-break-inside: auto;
-            }
+  .infographic-side,
+  .reflection-section,
+  .qr-section {
+    page-break-before: always;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
 
-            .infographic-side:last-child {
-                page-break-after: auto;  /* Don’t force break after last */
-            }
+  .qr-block {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
 
-            h1 { font-size: 2.2rem !important; margin-bottom: 0.8rem !important; }
-            h2 { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
-            h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
-            h4 { font-size: 1rem !important; margin-bottom: 0.3rem !important; }
-            p { font-size: 0.85rem !important; }
-            .text-6xl { font-size: 3rem !important; }
+  #printButton {
+    display: none !important;
+  }
 
-            .option-card { padding: 0.5rem !important; }
-            .card-details {
-                font-size: 0.75rem !important;
-                margin-top: 0.4rem !important;
-                padding: 0.5rem !important;
-                max-height: fit-content !important; /* Ensure details are visible when printing */
-                opacity: 1 !important;
-                overflow-y: visible !important; /* Ensure content is not cut off in print */
-            }
+  footer {
+    display: block !important;
+  }
+}
 
-            .checkbox-container label {
-                font-size: 0.8rem;
-            }
-            .checkbox-container input[type="checkbox"] {
-                width: 0.8rem; height: 0.8rem;
-            }
-            .checkbox-container input[type="checkbox"]:checked::after {
-                font-size: 0.6rem;
-            }
-
-            .reflection-section {
-                padding: 1.2rem;
-            }
-            .reflection-question h3 {
-                font-size: 1.4rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-            .reflection-option label {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            .fillable-textarea {
-                height: auto !important; /* Allow content to dictate height */
-                min-height: 1rem !important;
-                border: none !important; /* Remove border for cleaner print */
-                background-color: transparent !important;
-                box-shadow: none !important;
-                resize: none !important;
-            }
-
-            .qr-section {
-                flex-direction: row !important;
-                gap: 1rem !important;
-                padding: 1rem !important;
-            }
-            .qr-block {
-                max-width: 45% !important;
-                padding: 0.8rem !important;
-                gap: 0.5rem !important;
-            }
-            .qr-block img {
-                width: 80px !important;
-                height: 80px !important;
-            }
-            .qr-block h4 { font-size: 1rem !important; }
-            .qr-block p { font-size: 0.75rem !important; }
-            .qr-block a {
-                color: #334155 !important; /* Make links black for print */
-                text-decoration: none !important; /* Remove underline for print */
-            }
-        }
-        /* Styling for the new QR code section */
-        .qr-section {
-            display: flex; /* Ensure flexbox is applied */
-            flex-direction: row; /* Arrange side-by-side by default */
-            flex-wrap: wrap; /* Allow wrapping if needed */
-            justify-content: center; /* Center items horizontally */
-            align-items: flex-start; /* Align items to the top if they have different heights */
-            gap: 2rem; /* Space between the two QR code blocks */
-            padding: 2.5rem;
-            background-color: #e0f2fe; /* Light blue background */
-            border-radius: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-            border: 1px solid #90cdf4; /* Light blue border */
-        }
-        .qr-block {
-            text-align: center; /* Keep centered for visual grouping with QR */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            width: 100%; /* Take full width of its container on small screens */
-            max-width: 300px; /* Limit individual QR block width */
-        }
-        .qr-block img {
-            border-radius: 0.5rem;
-            border: 1px solid #cbd5e1;
-        }
-        .qr-block h4 {
-            font-size: 1.25rem; /* Larger heading for QR blocks */
-            font-weight: 700;
-            color: #1e3a8a; /* Darker blue for headings */
-            margin-bottom: 0;
-        }
-        .qr-block p {
-            font-size: 0.95rem;
-            color: #475569;
-        }
         /* Responsive adjustments for QR section */
         @media (min-width: 768px) {
             .qr-section {
@@ -840,16 +733,13 @@
             </p>
 
             <!-- New "Explore More: Career Quizzes" Section -->
-            <<div class="qr-section">
-  <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center w-full">Explore More: Career Quizzes</h3>
-
-  <div class="qr-section">
+            <div class="qr-section">
   <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center w-full">Explore More: Career Quizzes</h3>
 
   <div class="qr-block">
     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
     <a href="https://www.careerpilot.org.uk/information/buzz-quiz" target="_blank" class="block">
-      <img src="qr_careerpilot.png" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot">
+      <img src="qr_careerpilot.png" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot" />
     </a>
     <p class="text-sm text-gray-600">
       Scan or
@@ -863,7 +753,7 @@
   <div class="qr-block">
     <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
     <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
-      <img src="qr_ncs.png" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service">
+      <img src="qr_ncs.png" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service" />
     </a>
     <p class="text-sm text-gray-600">
       Scan or
