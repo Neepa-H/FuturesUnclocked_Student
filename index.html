@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Future Unlocked: A Student’s Guide to Post-16 Pathways</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -249,57 +249,140 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
         }
 
-        /* Print-specific adjustments to ensure optimal layout on A4 */
-        @media print {
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .infographic-side,
-  .reflection-section,
-  .qr-section {
-    page-break-before: always;
-    break-before: page;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .qr-block {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  #printButton {
-    display: none !important;
-  }
-            
-  .compare-section,
-.nextsteps-section {
-  page-break-before: always;
-  break-before: page;
-  page-break-inside: avoid;
-  break-inside: avoid;
-}
-          
-
-  footer {
-    display: block !important;
-  }
-}
-
-        /* Responsive adjustments for QR section */
-        @media (min-width: 768px) {
-            .qr-section {
-                /* Already set to row and wrap above, so no change needed here for direction */
-            }
-            .qr-block {
-                flex: 1; /* Allow blocks to grow and shrink */
-                min-width: 250px; /* Minimum width for blocks */
-                max-width: 45%; /* Max width to allow two per row */
-            }
+        /* Styling for the new QR code section */
+        .qr-container {
+            width: 100%;
+            max-width: 5xl;
+            margin-top: 2rem;
+            padding: 2.5rem;
+            background-color: #e0f2fe; /* Light blue background */
+            border-radius: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #90cdf4; /* Light blue border */
         }
 
+        .qr-section {
+            display: flex;
+            flex-direction: column; /* Stack header and blocks vertically */
+            align-items: center; /* Center content */
+            gap: 1.5rem;
+        }
+
+        .qr-blocks-wrapper {
+            display: flex;
+            flex-direction: row; /* QR blocks side-by-side */
+            flex-wrap: wrap; /* Allow wrapping */
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .qr-block {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex: 1; /* Allow blocks to grow */
+            min-width: 250px;
+            max-width: 320px;
+        }
+        .qr-block img {
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1;
+        }
+        .qr-block h4 {
+            font-size: 1.25rem; /* Larger heading for QR blocks */
+            font-weight: 700;
+            color: #1e3a8a; /* Darker blue for headings */
+            margin-bottom: 0;
+        }
+        .qr-block p {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+
+        /* Print-specific adjustments to ensure optimal layout on A4 */
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                min-height: auto;
+                justify-content: flex-start;
+            }
+
+            .infographic-side {
+                width: 100%;
+                height: 210mm;         /* Exact A4 landscape height */
+                max-height: 210mm;     /* Prevent overflow */
+                max-width: 297mm;      /* Exact A4 landscape width */
+                overflow: hidden;      /* Prevent spillover */
+                box-shadow: none;
+                border-radius: 0;
+                margin-bottom: 0;
+                padding: 1rem;         /* Tighter padding for print */
+                page-break-after: always;
+                page-break-inside: auto;
+            }
+
+            .infographic-side:last-child {
+                page-break-after: auto;  /* Don’t force break after last */
+            }
+
+            h1 { font-size: 2.2rem !important; margin-bottom: 0.8rem !important; }
+            h2 { font-size: 1.2rem !important; margin-bottom: 0.4rem !important; }
+            h3 { font-size: 1.6rem !important; margin-bottom: 0.5rem !important; }
+            h4 { font-size: 1rem !important; margin-bottom: 0.3rem !important; }
+            p { font-size: 0.85rem !important; }
+            .text-6xl { font-size: 3rem !important; }
+
+            .option-card { padding: 0.5rem !important; }
+            .card-details {
+                font-size: 0.75rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.5rem !important;
+                max-height: fit-content !important; /* Ensure details are visible when printing */
+                opacity: 1 !important;
+                overflow-y: visible !important; /* Ensure content is not cut off in print */
+            }
+
+            .checkbox-container label {
+                font-size: 0.8rem;
+            }
+            .checkbox-container input[type="checkbox"] {
+                width: 0.8rem; height: 0.8rem;
+            }
+            .checkbox-container input[type="checkbox"]:checked::after {
+                font-size: 0.6rem;
+            }
+
+            .reflection-section {
+                padding: 1.2rem;
+            }
+            .reflection-question h3 {
+                font-size: 1.4rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            .reflection-option label {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .fillable-textarea {
+                height: auto !important; /* Allow content to dictate height */
+                min-height: 1rem !important;
+                border: none !important; /* Remove border for cleaner print */
+                background-color: transparent !important;
+                box-shadow: none !important;
+                resize: none !important;
+            }
+
+            .qr-container { display: none !important; } /* Hide QR section for printing */
+        }
         /* Button styling */
         .btn-primary {
             @apply px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200 ease-in-out transform hover:scale-105;
@@ -308,9 +391,7 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen">
 
-    <!-- Side 1 of the Infographic -->
     <div class="infographic-side">
-        <!-- Title and Intro Panel -->
         <div class="text-center mb-8">
             <h1 class="text-5xl md:text-6xl font-extrabold text-blue-800 mb-4 leading-tight tracking-tight">
                 <span class="text-indigo-600">Your Future Unlocked:</span><br>
@@ -322,10 +403,8 @@
             <button id="printButton" class="btn-primary mt-6">Print Guide</button>
         </div>
 
-        <!-- Visual Summary of Post-16 Pathways Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
 
-            <!-- A-levels Card -->
             <div class="option-card bg-sky-100 p-6 rounded-2xl shadow-lg border-b-4 border-sky-400 cursor-pointer" data-pathway="al">
                 <span class="text-6xl mb-4" role="img" aria-label="Compass Icon">🧭</span>
                 <h2 class="text-2xl font-bold text-sky-800 mb-2 text-left">A-levels</h2>
@@ -379,7 +458,6 @@
                 </div>
             </div>
 
-            <!-- BTECs Card -->
             <div class="option-card bg-emerald-100 p-6 rounded-2xl shadow-lg border-b-4 border-emerald-400 cursor-pointer" data-pathway="btec">
                 <span class="text-6xl mb-4" role="img" aria-label="Gear Icon">⚙️</span>
                 <h2 class="text-2xl font-bold text-emerald-800 mb-2 text-left">BTECs</h2>
@@ -435,7 +513,6 @@
                 </div>
             </div>
 
-            <!-- T-Levels Card -->
             <div class="option-card bg-purple-100 p-6 rounded-2xl shadow-lg border-b-4 border-purple-400 cursor-pointer" data-pathway="tlevel">
                 <span class="text-6xl mb-4" role="img" aria-label="Building Icon">🏢</span>
                 <h2 class="text-2xl font-bold text-purple-800 mb-2 text-left">T-Levels</h2>
@@ -489,7 +566,6 @@
                 </div>
             </div>
 
-            <!-- IB (International Baccalaureate) Card -->
             <div class="option-card bg-indigo-100 p-6 rounded-2xl shadow-lg border-b-4 border-indigo-400 cursor-pointer" data-pathway="ib">
                 <span class="text-6xl mb-4" role="img" aria-label="Globe Icon">🌍</span>
                 <h2 class="text-2xl font-bold text-indigo-800 mb-2 text-left">IB (International Baccalaureate) Diploma</h2>
@@ -543,7 +619,6 @@
                 </div>
             </div>
 
-            <!-- Apprenticeships Card -->
             <div class="option-card bg-amber-100 p-6 rounded-2xl shadow-lg border-b-4 border-amber-400 cursor-pointer" data-pathway="app">
                 <span class="text-6xl mb-4" role="img" aria-label="Wrench Icon">🛠️</span>
                 <h2 class="text-2xl font-bold text-amber-800 mb-2 text-left">Apprenticeships</h2>
@@ -597,7 +672,6 @@
                 </div>
             </div>
 
-            <!-- Work with Training Card -->
             <div class="option-card bg-teal-100 p-6 rounded-2xl shadow-lg border-b-4 border-teal-400 cursor-pointer" data-pathway="wwt">
                 <span class="text-6xl mb-4" role="img" aria-label="Briefcase with Person Icon">👨‍💼</span>
                 <h2 class="text-2xl font-bold text-teal-800 mb-2 text-left">Work with Training</h2>
@@ -652,7 +726,6 @@
             </div>
         </div>
 
-        <!-- Sidenote Box for Other Pathways -->
         <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-2xl shadow-lg text-base text-blue-900 mt-8 w-full max-w-5xl mx-auto flex items-start gap-4 text-left">
             <span class="text-5xl flex-shrink-0" role="img" aria-label="Helping Hands Icon">🤝</span>
             <div>
@@ -670,11 +743,45 @@
                 </p>
             </div>
         </div>
+
+        <div class="qr-container">
+            <div class="qr-section">
+                <h3 class="text-2xl font-bold text-blue-800 text-center w-full">Explore More: Career Quizzes</h3>
+                <div class="qr-blocks-wrapper">
+                    <div class="qr-block">
+                        <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
+                        <a href="https://www.careerpilot.org.uk/information/buzz-quiz" target="_blank" class="block">
+                          <img src="qr_careerpilot.png" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot">
+                        </a>
+                        <p class="text-sm text-gray-600">
+                          Scan or
+                          <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="text-blue-600 hover:underline">
+                            click here
+                          </a>
+                          to explore your options with Careerpilot!
+                        </p>
+                    </div>
+                    <div class="qr-block">
+                        <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
+                        <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
+                          <img src="qr_ncs.png" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service">
+                        </a>
+                        <p class="text-sm text-gray-600">
+                          Scan or
+                          <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="text-blue-600 hover:underline">
+                            click here
+                          </a>
+                          for the National Careers Service Skills Assessment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
-    <!-- Side 2 of the Infographic -->
     <div class="infographic-side">
-        <!-- Self-Reflection Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl mb-8 border-t-4 border-gray-300">
             <p class="text-base text-gray-700 italic mb-4 text-left">
                 💡 There’s no single 'right' answer – your journey is unique! Use these prompts to guide your thinking during our session and afterwards.
@@ -740,43 +847,8 @@
             <p class="mt-6 text-gray-800 text-lg text-left">
                 <strong>If you have additional needs, talk to your careers adviser or SENCO about what support is available at each provider.</strong>
             </p>
+        </div>
 
-            <!-- New "Explore More: Career Quizzes" Section -->
-            <div class="qr-section">
-  <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center w-full">Explore More: Career Quizzes</h3>
-
-  <div class="qr-block">
-    <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (Careerpilot)</h4>
-    <a href="https://www.careerpilot.org.uk/information/buzz-quiz" target="_blank" class="block">
-      <img src="qr_careerpilot.png" alt="QR Code for Careerpilot" width="150" height="150" title="QR Code for Careerpilot" />
-    </a>
-    <p class="text-sm text-gray-600">
-      Scan or
-      <a href="https://www.careerpilot.org.uk/career-quiz" target="_blank" class="text-blue-600 hover:underline">
-        click here
-      </a>
-      to explore your options with Careerpilot!
-    </p>
-  </div>
-
-  <div class="qr-block">
-    <h4 class="text-lg font-semibold text-gray-700">Try a Career Quiz (National Careers Service)</h4>
-    <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="block">
-      <img src="qr_ncs.png" alt="QR Code for National Careers Service" width="150" height="150" title="QR Code for National Careers Service" />
-    </a>
-    <p class="text-sm text-gray-600">
-      Scan or
-      <a href="https://nationalcareers.service.gov.uk/skills-assessment" target="_blank" class="text-blue-600 hover:underline">
-        click here
-      </a>
-      for the National Careers Service Skills Assessment.
-    </p>
-  </div>
-</div>
-
-
-
-        <!-- Compare and Decide Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl mb-8 border-t-4 border-gray-300">
             <h3 class="text-3xl font-bold text-gray-900 mb-6 text-left">Compare & Decide</h3>
 
@@ -796,7 +868,6 @@
             </div>
         </div>
 
-        <!-- Next Steps Section -->
         <div class="reflection-section bg-gray-100 p-8 rounded-2xl shadow-inner w-full max-w-5xl border-t-4 border-gray-300">
             <h3 class="text-3xl font-bold text-gray-900 mb-6 text-left">Your Next Steps</h3>
 
@@ -925,7 +996,7 @@
 </script>
 
 <footer class="text-center text-xs text-gray-500 mt-8">
-  © 2025 Futures Unlocked | Developed by N.Hekim
+  © 2025 Futures Unlocked | Developed by S.N.Hekim
 </footer>
 
 </body>
